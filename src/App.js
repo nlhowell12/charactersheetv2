@@ -1,26 +1,51 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux'
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import blue from '@material-ui/core/colors/blue';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { createStore } from 'redux';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
+
+import Login from 'components/Login'
+import Signup from 'components/Signup'
+// import NewChar from 'components/NewChar'
+import Navbar from 'components/Navbar';
+import Home from 'components/Home'
+import reducer from 'reducers'
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+  },
+  typography: {
+    useNextVariants: true,
+  },
+})
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        <div className="App">
+          <Navbar></Navbar>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Login}/>
+              <Route path="/signup" component={Signup}/>
+              <Route path="/home" component={Home}/>
+              {/* <Route path="/create" component={NewChar}/> */}
+            </Switch>
+          </Router>
+        </div>
+      </MuiThemeProvider>
+      </Provider>
     );
   }
 }
