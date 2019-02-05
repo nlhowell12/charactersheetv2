@@ -12,7 +12,7 @@ import {
 
 import Login from 'components/Login'
 import Signup from 'components/Signup'
-// import NewChar from 'components/NewChar'
+import NewChar from 'components/NewChar'
 import Navbar from 'components/Navbar';
 import Home from 'components/Home'
 import reducer from 'reducers'
@@ -40,7 +40,7 @@ class App extends Component {
               <Route exact path="/" component={Login}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/home" component={Home}/>
-              {/* <Route path="/create" component={NewChar}/> */}
+              <Route path="/create" component={NewChar}/>
             </Switch>
           </Router>
         </div>

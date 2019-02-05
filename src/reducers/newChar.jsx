@@ -13,7 +13,7 @@ export const newCharState = {
         intelligence: 0,
         charisma: 0
     },
-    classes: [],
+    classes: {},
     feats: [],
 }
 
