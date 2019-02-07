@@ -1,5 +1,8 @@
 export default [
     {
+        name: 'None'
+    },
+    {
         name: 'Asmodeus',
     },
     {
@@ -8,4 +11,5 @@ export default [
     {
         name: 'Lathander',
     },
+
 ]

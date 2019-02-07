@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-import { logout } from 'actions'
+import { logout } from 'actions/actions'
 import { withRouter } from 'react-router-dom';
 
 

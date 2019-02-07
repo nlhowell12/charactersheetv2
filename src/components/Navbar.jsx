@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
 
-import { drawerToggle } from 'actions';
+import { drawerToggle } from 'actions/actions';
 
 const styles = {
   root: {

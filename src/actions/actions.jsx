@@ -1,10 +1,10 @@
 const DRAWER_TOGGLE = 'DRAWER_TOGGLE';
 const LOGIN = 'LOGIN';
 const ADD_CHARACTER = "ADD_CHARACTER";
+const CHANGE_CHARACTER_DETAIL = 'CHANGE_CHARACTER_DETAIL';
 const CHANGE_USER_LEVEL = "CHAGE_USER_LEVEL";
 const LOGOUT = "LOGOUT";
 const CHANGE_ATTRIBUTE = 'CHANGE_ATTRIBUTE';
-const CHANGE_DETAIL = 'CHANGE_DETAIL';
 const CHANGE_TOP_LEVEL = 'CHANGE_TOP_LEVEL';
 const CHANGE_SKILL_RANK = 'CHANGE_SKILL_RANK';
 const CHANGE_SKILL_MISC = 'CHANGE_SKILL_MISC';
@@ -59,6 +59,13 @@ const addCharacter = () => {
     }
 }
 
+const changeCharacterDetail = (detail, value) => {
+    return {
+        type: CHANGE_CHARACTER_DETAIL,
+        detail,
+        value
+    }
+}
 const changeUserLevel = () => {
     return {
         type: CHANGE_USER_LEVEL
@@ -69,14 +76,6 @@ const changeAttribute = (attribute, value) => {
     return {
         type: CHANGE_ATTRIBUTE,
         attribute,
-        value
-    }
-}
-
-const changeDetail = (detail, value) => {
-    return {
-        type: CHANGE_DETAIL,
-        detail,
         value
     }
 }
@@ -171,7 +170,7 @@ export {
     addCharacter, 
     changeUserLevel, 
     changeAttribute, 
-    changeDetail,
+    changeCharacterDetail,
     changeTopLevel,
     changeSkillRank,
     changeSkillMisc,
@@ -191,7 +190,7 @@ export {
     CHANGE_USER_LEVEL, 
     DRAWER_TOGGLE, 
     CHANGE_ATTRIBUTE,
-    CHANGE_DETAIL,
+    CHANGE_CHARACTER_DETAIL,
     CHANGE_TOP_LEVEL,
     CHANGE_SKILL_RANK,
     CHANGE_SKILL_MISC,

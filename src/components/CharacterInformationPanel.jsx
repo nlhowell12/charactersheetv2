@@ -9,13 +9,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Card from '@material-ui/core/Card';
 
 import deities from 'assets/deities';
+
+import { changeCharacterDetail } from 'actions/actions';
 
 const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -31,7 +35,6 @@ const styles = theme => ({
     width: 200,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    // height: 56,
     position: 'relative',
     top: '16px'
   },
@@ -48,31 +51,20 @@ const alignments = [
     'Chaotic Evil'
 ]
 class CharacterInformationPanel extends React.Component {
-  state = {
-    name: '',
-    age: '',
-    height: '',
-    deity: '',
-    alignment: ''
-  };
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
 
   render() {
-    const { classes, character } = this.props;
+    const { classes, character, dispatch } = this.props;
+    const { deity, alignment, name, age, height, weight } = this.props.character;
     return (
+      <Card>
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
           required
           id="outlined-name"
           label="Name"
           className={classes.textField}
-          value={this.state.name}
-          onChange={this.handleChange('name')}
+          value={name}
+          onChange={evt => dispatch(changeCharacterDetail('name', evt.target.value))}
           margin="normal"
           variant="outlined"
         />
@@ -81,27 +73,27 @@ class CharacterInformationPanel extends React.Component {
           id="outlined-age"
           label="Age"
           className={classes.textField}
-          value={this.state.age}
-          onChange={this.handleChange('age')}
+          value={age}
+          onChange={evt => dispatch(changeCharacterDetail('age', evt.target.value))}
           margin="normal"
           variant="outlined"
         />
 
         <TextField
           id="outlined-height"
-          label="height"
+          label="Height"
           className={classes.textField}
-          value={this.state.height}
-          onChange={this.handleChange('height')}
+          value={height}
+          onChange={evt => dispatch(changeCharacterDetail('height', evt.target.value))}
           margin="normal"
           variant="outlined"
         />
         <TextField
           id="outlined-weight"
-          label="weight"
+          label="Weight"
           className={classes.textField}
-          value={this.state.weight}
-          onChange={this.handleChange('weight')}
+          value={weight}
+          onChange={evt => dispatch(changeCharacterDetail('weight', evt.target.value))}
           margin="normal"
           variant="outlined"
         />
@@ -115,13 +107,14 @@ class CharacterInformationPanel extends React.Component {
             Deity
           </InputLabel>
           <Select
-            value={this.state.deity}
-            onChange={this.handleChange('deity')}
+            value={deity}
+            onChange={evt => dispatch(changeCharacterDetail('deity', evt.target.value))}
             input={
               <OutlinedInput
                 labelWidth={35}
                 name="deity"
                 id="outlined-deity-simple"
+                error={Object.keys(character.classes).includes('cleric') && deity.name === 'None'}
               />
             }
           >
@@ -141,8 +134,8 @@ class CharacterInformationPanel extends React.Component {
             Alignment
           </InputLabel>
           <Select
-            value={this.state.alignment}
-            onChange={this.handleChange('alignment')}
+            value={alignment}
+            onChange={evt => dispatch(changeCharacterDetail('alignment', evt.target.value))}
             input={
               <OutlinedInput
                 labelWidth={70}
@@ -157,6 +150,7 @@ class CharacterInformationPanel extends React.Component {
           </Select>
         </FormControl>
       </form>
+      </Card>
     );
   }
 }
@@ -165,9 +159,4 @@ CharacterInformationPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => {
-    return {
-        character: state.newChar
-    }
-}
-export default connect(mapStateToProps)(withStyles(styles)(CharacterInformationPanel));
+export default connect()(withStyles(styles)(CharacterInformationPanel));

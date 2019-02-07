@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SIGNUP, ADD_CHARACTER, CHANGE_USER_LEVEL } from 'actions';
+import { LOGIN, LOGOUT, SIGNUP, ADD_CHARACTER, CHANGE_USER_LEVEL } from 'actions/actions';
 
 const testCampaigns = [
     {

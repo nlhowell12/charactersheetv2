@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import NavDrawer from 'components/NavDrawer';
 import MenuWrapper from 'components/MenuWrapper';
-import { login } from 'actions';
+import { login } from 'actions/actions';
 
 const styles = theme => ({
     container: {

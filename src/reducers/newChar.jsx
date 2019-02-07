@@ -1,3 +1,6 @@
+import { CHANGE_CHARACTER_DETAIL } from 'actions/actions';
+import { CHANGE_ATTRIBUTE } from '../actions/actions';
+
 export const newCharState = {
     name: '',
     age: '',
@@ -20,6 +23,15 @@ export const newCharState = {
 
 export default (state = newCharState, action) => {
     switch(action.type) {
+        case CHANGE_CHARACTER_DETAIL:
+            return {...state, [action.detail]: action.value}
+        case CHANGE_ATTRIBUTE:
+            return {
+                ...state,
+                attributes:{
+                    ...state.attributes,
+                    [action.attribute]: action.value
+                }}
         default:
             return state
     }

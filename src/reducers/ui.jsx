@@ -1,4 +1,4 @@
-import { DRAWER_TOGGLE, CLASS_TOGGLE } from 'actions'
+import { DRAWER_TOGGLE, CLASS_TOGGLE } from 'actions/actions'
 
 export const uiState = {
     leftNav: false,
