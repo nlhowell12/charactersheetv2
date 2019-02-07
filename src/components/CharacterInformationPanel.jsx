@@ -7,6 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 import deities from 'assets/deities';
 
@@ -29,10 +31,10 @@ const styles = theme => ({
     width: 200,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    height: 56,
+    // height: 56,
     position: 'relative',
     top: '16px'
-  }
+  },
 });
 
 const alignments = [
@@ -50,7 +52,7 @@ class CharacterInformationPanel extends React.Component {
     name: '',
     age: '',
     height: '',
-    deity: {},
+    deity: '',
     alignment: ''
   };
 
@@ -103,44 +105,57 @@ class CharacterInformationPanel extends React.Component {
           margin="normal"
           variant="outlined"
         />
-        <Select
+        <FormControl variant="outlined" className={classes.select}>
+          <InputLabel
+            ref={ref => {
+              this.InputLabelRef = ref;
+            }}
+            htmlFor="outlined-deity-simple"
+          >
+            Deity
+          </InputLabel>
+          <Select
             value={this.state.deity}
             onChange={this.handleChange('deity')}
-            className={classes.select}
-            
             input={
               <OutlinedInput
-                labelWidth={0}
+                labelWidth={35}
                 name="deity"
                 id="outlined-deity-simple"
               />
             }
-            error={this.state.deity === "None" && "cleric" in Object.keys(character.classes)}
-          > 
-            <MenuItem value="None">
-              <em>None</em>
-            </MenuItem>
+          >
             {deities.map(deity => {
                 return <MenuItem key={deity.name} value={deity}>{deity.name}</MenuItem>
-            })} 
-        </Select>
+            })}
+          </Select>
+        </FormControl>
 
-        <Select
+        <FormControl variant="outlined" className={classes.select}>
+          <InputLabel
+            ref={ref => {
+              this.InputLabelRef = ref;
+            }}
+            htmlFor="outlined-alignment-simple"
+          >
+            Alignment
+          </InputLabel>
+          <Select
             value={this.state.alignment}
             onChange={this.handleChange('alignment')}
-            className={classes.select}
             input={
               <OutlinedInput
-                labelWidth={0}
+                labelWidth={70}
                 name="alignment"
                 id="outlined-alignment-simple"
               />
             }
-          > 
+          >
             {alignments.map(alignment => {
                 return <MenuItem key={alignment} value={alignment}>{alignment}</MenuItem>
             })}
-        </Select>
+          </Select>
+        </FormControl>
       </form>
     );
   }
