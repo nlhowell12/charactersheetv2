@@ -10,13 +10,13 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import Card from '@material-ui/core/Card';
  
 import { titleCase } from 'helpers/formatHelpers';
-import { calcAttMod } from 'helpers/attributeHelpers';
+import { calcAttMod, getRacialModifiers } from 'helpers/attributeHelpers';
 import { changeAttribute } from 'actions/actions';
 
 
 const styles = theme => ({
     container: {
-        width: '300px',
+        width: '500px',
         margin: theme.spacing.unit
     },
     attribute: {
@@ -82,7 +82,6 @@ class AttributesPanel extends Component {
                                 id="outlined-number"
                                 label={'Modifier'}
                                 value={calcAttMod(character.attributes[attribute])}
-                                // onChange={}
                                 className={classes.textField}
                                 InputLabelProps={{
                                     shrink: true,
@@ -96,6 +95,26 @@ class AttributesPanel extends Component {
                                 }}
                                 margin="normal"
                                 variant="outlined"
+                                disabled
+                                />
+                        <TextField
+                                id="outlined-number"
+                                label={'Racial'}
+                                value={character.race ? getRacialModifiers(character.race, character.subrace, attribute) : 0}
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                InputProps={{
+                                    inputProps: {
+                                        style: {
+                                            textAlign: 'center',
+                                        }
+                                    }
+                                }}
+                                margin="normal"
+                                variant="outlined"
+                                disabled
                                 />
                         </Card>
                     )

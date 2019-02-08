@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Card from '@material-ui/core/Card';
 
 import deities from 'assets/deities';
+import { races, subraces } from 'assets/races';
 
 import { changeCharacterDetail } from 'actions/actions';
 
@@ -19,11 +20,14 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    minHeight: '200px',
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    height: '60px'
   },
   dense: {
     marginTop: 16,
@@ -32,12 +36,14 @@ const styles = theme => ({
     width: 200,
   },
   select: {
-    width: 200,
+    width: 210,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    position: 'relative',
-    top: '16px'
-  },
+    marginTop: '16px'  },
+  wrapper: {
+    margin: theme.spacing.unit,
+    display: 'flex'
+  }
 });
 
 const alignments = [
@@ -54,9 +60,9 @@ class CharacterInformationPanel extends React.Component {
 
   render() {
     const { classes, character, dispatch } = this.props;
-    const { deity, alignment, name, age, height, weight } = this.props.character;
+    const { deity, alignment, name, age, height, weight, race, subrace } = this.props.character;
     return (
-      <Card>
+      <Card className={classes.wrapper}>
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
           required
@@ -97,6 +103,56 @@ class CharacterInformationPanel extends React.Component {
           margin="normal"
           variant="outlined"
         />
+        <FormControl variant="outlined" className={classes.select}>
+          <InputLabel
+            ref={ref => {
+              this.InputLabelRef = ref;
+            }}
+            htmlFor="outlined-race-simple"
+          >
+            Race
+          </InputLabel>
+          <Select
+            value={race}
+            onChange={evt => dispatch(changeCharacterDetail('race', evt.target.value))}
+            input={
+              <OutlinedInput
+                labelWidth={35}
+                name="race"
+                id="outlined-race-simple"
+              />
+            }
+          >
+            {races.map(race => {
+                return <MenuItem key={race.name} value={race}>{race.name}</MenuItem>
+            })}
+          </Select>
+        </FormControl>
+        {subraces[race.name] ? <FormControl variant="outlined" className={classes.select}>
+          <InputLabel
+            ref={ref => {
+              this.InputLabelRef = ref;
+            }}
+            htmlFor="outlined-subrace-simple"
+          >
+            Subrace
+          </InputLabel>
+          <Select
+            value={subrace}
+            onChange={evt => dispatch(changeCharacterDetail('subrace', evt.target.value))}
+            input={
+              <OutlinedInput
+                labelWidth={70}
+                name="subrace"
+                id="outlined-subrace-simple"
+              />
+            }
+          >
+            {subraces[race.name].map(subrace => {
+                return <MenuItem key={subrace.name} value={subrace}>{subrace.name}</MenuItem>
+            })}
+          </Select>
+        </FormControl> :  null}
         <FormControl variant="outlined" className={classes.select}>
           <InputLabel
             ref={ref => {
